@@ -1,32 +1,36 @@
 import React from 'react';
-import { Text, View, Image, TextInput, TouchableOpacity , StyleSheet, Alert} from 'react-native';
+import { Text, View, Image, TextInput, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import getSchedule from '../utils/NeptunCommunicator';
 
-const login = (creds) =>{
-    console.log(creds.id,creds.password)
+const login = (creds) => {
+    console.log(creds.id, creds.password)
 
-    if((creds.id == "" || creds.password == "")){
+    if ((creds.id == "" || creds.password == "")) {
         Alert.alert(
             "Login error",
             "Make sure to fill out every field",
             [
-                {text:"OK"}
+                { text: "OK" }
             ]
         );
-    }else{
-        if(getSchedule(creds)){
-            console.log("succes")
-            //Can redirect to home page
-        }
-        else{
-            Alert.alert(
-                "Invalid credentials",
-                "Please check if your credentails are valid!",
-                [
-                    {text:"OK"}
-                ]
-            )
-        }
+    } else {
+        let schedule = getSchedule(creds);
+        Promise.resolve(schedule).then(result => {
+            if (result == true) {
+                console.log("succes")
+                //Can redirect to home page
+            }
+            else {
+                console.log("Alerted")
+                Alert.alert(
+                    "Invalid credentials",
+                    "Please check if your credentails are valid!",
+                    [
+                        { text: "OK" }
+                    ]
+                )
+            }
+        })
     }
 }
 
@@ -52,16 +56,16 @@ const Login = () => {
                     autoCapitalize="characters"
                     value={id}
                     onChangeText={text => onChangeId(text)}
-                    placeholder='Neptun id'/>
+                    placeholder='Neptun id' />
                 <TextInput
                     style={styles.inputField}
                     placeholder='Neptun password'
                     value={password}
                     onChangeText={text => onChangePassword(text)}
-                    secureTextEntry={true}/>
+                    secureTextEntry={true} />
                 <TouchableOpacity
                     style={styles.loginBtn}
-                    onPress={() => login({id,password})}>
+                    onPress={() => login({ id, password })}>
                     <Text style={styles.loginTxt}>Login</Text>
                 </TouchableOpacity>
             </View>
@@ -70,43 +74,43 @@ const Login = () => {
 }
 
 const styles = StyleSheet.create({
-    background:{
+    background: {
         backgroundColor: "#48d1cc",
         alignItems: "center",
         justifyContent: "center",
         justifyContent: "flex-start",
         flex: 1,
     },
-    titleBox:{
+    titleBox: {
         flexDirection: "row",
         justifyContent: "center",
         margin: 20
     },
-    logo:{
+    logo: {
         width: 200,
         height: 200,
         flex: 1,
     },
-    title:{
+    title: {
         color: "black",
         fontSize: 50,
         textAlignVertical: "bottom",
         marginBottom: 40
     },
-    loginBtn:{
+    loginBtn: {
         backgroundColor: "rgba(0, 0, 255, 0.418)",
         alignItems: "center",
         padding: 10,
         borderRadius: 10,
         alignSelf: "center"
     },
-    loginTxt:{
+    loginTxt: {
         fontSize: 22,
         minWidth: "30%",
         maxWidth: "30%",
         textAlign: "center"
     },
-    inputField:{
+    inputField: {
         fontSize: 20,
         borderColor: "grey",
         borderWidth: 1,
