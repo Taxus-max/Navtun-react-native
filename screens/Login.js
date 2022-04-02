@@ -17,7 +17,6 @@ const login = (creds) => {
         let schedule = getSchedule(creds);
         Promise.resolve(schedule).then(result => {
             if (result == true) {
-                console.log("succes")
                 //Can redirect to home page
             }
             else {

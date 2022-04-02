@@ -1,5 +1,6 @@
 import * as SQLite from 'expo-sqlite'
 
+
 const db = SQLite.openDatabase('Navtun.db')
 
 class dbHandler {
@@ -7,8 +8,8 @@ class dbHandler {
         //drop existing,create new -- used if schedule is changed
         db.transaction(tx => {
             tx.executeSql(
-                'drop table if exists schedule '
-            );
+                'drop table if exists schedule'
+            )
             tx.executeSql(
                 'create table if not exists schedule (id integer primary key not null, name text, location text, lecturer text, start text, end text, isMuted int, notifDelay int, isCanceled int);'
             )
@@ -31,8 +32,8 @@ class dbHandler {
         })
     }
 
-    setDelay(id,delay){
-        db.transaction(tx =>{
+    setDelay(id, delay) {
+        db.transaction(tx => {
             tx.executeSql(
                 'update schedule set notifDelay = ? where id = ?', [delay, id]
             )
@@ -47,16 +48,16 @@ class dbHandler {
         })
     }
 
-    getCalendar() {
-        let calendar
-        db.transaction(tx => {
+     getCalendar = () => new Promise((resolve,reject) => {
+         db.transaction(tx => {
             tx.executeSql(
-                'select * from schedule order by datetime(start)', [], (trans, result) =>
-                calendar = result.rows._array
+                'select * from schedule order by datetime(start)', [], (trans, result) => {
+                    const calendar = result.rows._array
+                    resolve(calendar)
+                }
             )
         })
-        return calendar
-    }
+    })
 }
 
 export default new dbHandler()

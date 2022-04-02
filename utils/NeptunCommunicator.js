@@ -1,4 +1,5 @@
 import axiosService from "./axiosService";
+import dbhandler from "./dbhandler";
 
 const getSchedule = (credentials) => {
     var startDate = new Date().getTime();
@@ -30,12 +31,15 @@ const getSchedule = (credentials) => {
 
     let result = axiosService.getCalendar(data)
         .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            console.log(JSON.stringify(response.data.ErrorMessage));
-
             if (response.data.ErrorMessage == null) {
+                dbhandler.createTable();
+                for(var i =0;i<response.data.calendarData.length;i++){
+                    var data = response.data.calendarData[i]
+                    dbhandler.insertTable(data.title.split("-")[0].slice(6), data.location.split(" ")[0], data.title.split("-")[1].split("(")[1].slice(0,-2), String(new Date(parseInt(data.start.split("(")[1].slice(0,-2)))), String(new Date(parseInt(data.end.split("(")[1].slice(0,-2)))) )
+                }
+                dbhandler.getCalendar().then(response => console.log(response))
                 return true
-                //Alright,save credentails and then data into db
+                //save credentails 
             } else {
                 return false
             }
@@ -44,7 +48,6 @@ const getSchedule = (credentials) => {
         .catch(function (error) {
             console.log(error);
         });
-
     return result
 }
 
