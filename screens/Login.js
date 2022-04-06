@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Image, TextInput, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import getSchedule from '../utils/NeptunCommunicator';
 
-const login = (creds) => {
+const login = (creds,navigation) => {
     console.log(creds.id, creds.password)
 
     if ((creds.id == "" || creds.password == "")) {
@@ -17,7 +17,7 @@ const login = (creds) => {
         let schedule = getSchedule(creds);
         Promise.resolve(schedule).then(result => {
             if (result == true) {
-                //Can redirect to home page
+                navigation.navigate("Home")
             }
             else {
                 console.log("Alerted")
@@ -34,7 +34,7 @@ const login = (creds) => {
 }
 
 
-const Login = () => {
+const Login = ({navigation}) => {
 
     const [id, onChangeId] = React.useState('')
     const [password, onChangePassword] = React.useState('')
@@ -64,7 +64,7 @@ const Login = () => {
                     secureTextEntry={true} />
                 <TouchableOpacity
                     style={styles.loginBtn}
-                    onPress={() => login({ id, password })}>
+                    onPress={() => login({ id, password },navigation)}>
                     <Text style={styles.loginTxt}>Login</Text>
                 </TouchableOpacity>
             </View>
