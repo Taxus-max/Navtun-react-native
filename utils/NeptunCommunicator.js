@@ -37,7 +37,7 @@ const getSchedule = (credentials) => {
                     var data = response.data.calendarData[i]
                     dbhandler.insertTable(data.title.split("-")[0].slice(6), data.location.split(" ")[0], data.title.split("-")[1].split("(")[1].slice(0,-2), String(new Date(parseInt(data.start.split("(")[1].slice(0,-2)))), String(new Date(parseInt(data.end.split("(")[1].slice(0,-2)))) )
                 }
-                dbhandler.getCalendar().then(response => console.log(response))
+                //dbhandler.getCalendar().then(response => console.log(response))
                 return true
                 //save credentails 
             } else {

@@ -1,6 +1,7 @@
 import React from "react";
 import {Text, View, TouchableOpacity, TextInput, StyleSheet, Modal} from 'react-native';
 import {FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
+import dateRefactor from "../utils/dateRefactor";
 
 const saveSettings = (id, timeValue,{setTimeValue}) => {
     //Call dbmager save notifDealy here
@@ -61,7 +62,7 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
                                 <Text>Name:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.lecturer}</Text>
+                                <Text>{ModalValue.name}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
@@ -69,7 +70,7 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
                                 <Text>Lecturer:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.location}</Text>
+                                <Text>{ModalValue.lecturer}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
@@ -77,7 +78,7 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
                                 <Text>Location:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.name}</Text>
+                                <Text>{ModalValue.location}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
@@ -85,7 +86,7 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
                                 <Text>Start:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.start}</Text>
+                                <Text>{dateRefactor(ModalValue.start)}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
@@ -93,7 +94,7 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
                                 <Text>End:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.end}</Text>
+                                <Text>{dateRefactor(ModalValue.end)}</Text>
                             </View>
                         </View>
                     </View>
