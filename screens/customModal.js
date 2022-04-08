@@ -12,7 +12,6 @@ const settings = (ModalValue,status,{setSettingsStatus}) =>{
     let [timeValue,setTimeValue] = React.useState(undefined)
 
     if(status == true) {
-        console.log(timeValue)
         return(
             <View style={styles.elementContainer}>
                 <View style={styles.labelContainer}>
