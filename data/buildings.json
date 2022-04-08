@@ -1,0 +1,9 @@
+[
+  {"name": "A", "levels": 1,"coords": {"longitude": 17.908219, "latitude": 47.088679}},
+  {"name": "B", "levels": 2,"coords": {"longitude": 17.908155, "latitude": 47.088059}},
+  {"name": "C", "levels": null,"coords": {"longitude": null, "latitude": null}},
+  {"name": "D", "levels": null,"coords": {"longitude": null, "latitude": null}},
+  {"name": "J", "levels": null,"coords": {"longitude": null, "latitude": null}},
+  {"name": "I", "levels": 10,"coords": {"longitude": 17.907811, "latitude": 47.089446}},
+  {"name": "Pol", "levels": 1,"coords": {"longitude": 17.902672, "latitude": 47.085305 }}
+]

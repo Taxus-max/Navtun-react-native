@@ -28,7 +28,6 @@ const unMuteLecture = (id,{setCalendar}) => {
     dbHandler.changeMuteStatus(id,0)
     loadFlatlist({setCalendar})
 }
-
 const renderList = (item,{setModalVisible},{setModalValue},{setCalendar}) => {
     const renderButton = () => {
         if (item.isMuted == 0) {
