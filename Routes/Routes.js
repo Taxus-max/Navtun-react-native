@@ -16,9 +16,10 @@ const Routes = () =>(
             }}
         >
 
+            <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen name="Home" component={Home}/>
             <Stack.Screen name="Loading" component={Loading}/>
-            <Stack.Screen name="Login" component={Login}/>
+
 
 
             

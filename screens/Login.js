@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
             <View style={styles.titleBox}>
                 <Image
                     style={styles.logo}
-                    source={require("../assets/logo.png")}
+                    source={require("../assets/logo2.png")}
                 />
                 <Text style={styles.title}>Navtun</Text>
             </View>
@@ -76,25 +76,26 @@ const styles = StyleSheet.create({
     background: {
         backgroundColor: "#48d1cc",
         alignItems: "center",
-        justifyContent: "center",
         justifyContent: "flex-start",
         flex: 1,
     },
     titleBox: {
         flexDirection: "row",
         justifyContent: "center",
-        margin: 20
-    },
+        margin: 20,
+        paddingTop:20,
+      },
     logo: {
-        width: 200,
-        height: 200,
-        flex: 1,
+        width: 115,
+        height: 150,
+        marginBottom: 40,
     },
     title: {
         color: "black",
         fontSize: 50,
         textAlignVertical: "bottom",
-        marginBottom: 40
+        marginBottom: 40,
+
     },
     loginBtn: {
         backgroundColor: "rgba(0, 0, 255, 0.418)",
