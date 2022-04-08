@@ -20,24 +20,26 @@ const showModal = (item, {setModalVisible},{setModalValue}) => {
     setModalValue(item);
 }
 
-const muteLecture = (id) => {
-    console.log("muted", id)
+const muteLecture = (id,{setCalendar}) => {
+    dbHandler.changeMuteStatus(id,1)
+    loadFlatlist({setCalendar})
 }
-const unMuteLecture = (id) => {
-    console.log("unmuted", id)
+const unMuteLecture = (id,{setCalendar}) => {
+    dbHandler.changeMuteStatus(id,0)
+    loadFlatlist({setCalendar})
 }
 
-const renderList = (item,{setModalVisible},{setModalValue}) => {
+const renderList = (item,{setModalVisible},{setModalValue},{setCalendar}) => {
     const renderButton = () => {
         if (item.isMuted == 0) {
             return (
-                <TouchableOpacity onPress={() => muteLecture(item.id)}>
+                <TouchableOpacity onPress={() => muteLecture(item.id,{setCalendar})}>
                     <FontAwesome color={"white"} size={20} name="bell"/>
                 </TouchableOpacity>
             )
         } else {
             return (
-                <TouchableOpacity onPress={() => unMuteLecture(item.id)}>
+                <TouchableOpacity onPress={() => unMuteLecture(item.id,{setCalendar})}>
                     <FontAwesome color={"white"} size={20} name="bell-slash"/>
                 </TouchableOpacity>
             )
@@ -96,7 +98,7 @@ const Home = () => {
             <View style={styles.bottomBox}>
                 <FlatList
                     data={calendar}
-                    renderItem={({item}) => renderList(item,{setModalVisible},{setModalValue})}
+                    renderItem={({item}) => renderList(item,{setModalVisible},{setModalValue},{setCalendar})}
                 />
             </View>
         </View>
