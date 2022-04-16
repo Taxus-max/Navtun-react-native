@@ -1,8 +1,10 @@
 import React from "react";
-import {Text, View, Image, StyleSheet,TouchableOpacity} from 'react-native';
+import {Text, View, Image, StyleSheet,TouchableOpacity,Dimensions} from 'react-native';
 import buildings from "../data/buildings.json";
 import images from '../data/buildings'
 import { Ionicons } from '@expo/vector-icons';
+
+
 
 const setInitialMap = (currentLocation) =>{
     if(currentLocation.includes("fsz")){
@@ -48,12 +50,15 @@ const Menu = (isMenuOpen,activeMenuElement,currentLocation,{setActiveMenuElement
 const Map = (currentMap) =>{
     let image = require("../assets/maps/notSupported.png")
 
+
     for(let i = 0;i < images.length;i++){
         if(images[i][0] == currentMap){
             image = images[i][1]
         }
     }
+
     return(
+
         <Image
             style={styles.map}
             source={image}/>
@@ -100,8 +105,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     map: {
-        height: "45%",
-        width: "90%",
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        resizeMode: "center"
     },
     menuElement:{
         color:'white',
