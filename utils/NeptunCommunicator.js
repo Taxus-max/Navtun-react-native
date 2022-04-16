@@ -1,5 +1,11 @@
 import axiosService from "./axiosService";
 import dbhandler from "./dbhandler";
+import * as SecureStore from 'expo-secure-store';
+
+async function setCredentials(id,password){
+    await SecureStore.setItemAsync("NavtunId", id);
+    await SecureStore.setItemAsync("NavtunPass", password);
+}
 
 const getSchedule = (credentials) => {
     var startDate = new Date().getTime();
@@ -8,7 +14,7 @@ const getSchedule = (credentials) => {
     endDate = endDate.getTime();
 
     //Debug section//
-    console.log(credentials)
+    //console.log(credentials)
     console.log(startDate);
     console.log(endDate);
     //==//
@@ -35,9 +41,12 @@ const getSchedule = (credentials) => {
                 dbhandler.createTable();
                 for(var i =0;i<response.data.calendarData.length;i++){
                     var data = response.data.calendarData[i]
-                    dbhandler.insertTable(data.title.split("-")[0].slice(6), data.location.split(" ")[0], data.title.split("-")[1].split("(")[1].slice(0,-2), String(new Date(parseInt(data.start.split("(")[1].slice(0,-2)))), String(new Date(parseInt(data.end.split("(")[1].slice(0,-2)))) )
+                    dbhandler.insertTable(data.title.split("-")[0].slice(6), data.location.split(" ")[0], data.title.split("-")[1].split("(")[1].slice(0,-2), new Date(parseInt(data.start.split("(")[1].slice(0,-2))).toUTCString(), new Date(parseInt(data.end.split("(")[1].slice(0,-2))).toUTCString() )
                 }
                 //dbhandler.getCalendar().then(response => console.log(response))
+
+                setCredentials(credentials.id.toUpperCase(),credentials.password);
+
                 return true
                 //save credentails 
             } else {

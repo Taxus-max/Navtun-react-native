@@ -3,7 +3,8 @@ import { Text, View, Image, TextInput, TouchableOpacity, StyleSheet, Alert} from
 import getSchedule from '../utils/NeptunCommunicator';
 
 const login = (creds,navigation) => {
-    console.log(creds.id, creds.password)
+    //*Debug section*
+    //console.log(creds.id, creds.password)
 
     if ((creds.id == "" || creds.password == "")) {
         Alert.alert(
