@@ -1,7 +1,7 @@
 
 const dateRefactor = (date) =>{
     let TMPDate = new Date(date)
-    return TMPDate.getFullYear() +"."+ (TMPDate.getMonth()+1) +"."+ TMPDate.getDate() +" "+ TMPDate.getHours() +":"+(TMPDate.getMinutes()<10?'0':'')+TMPDate.getMinutes()
+    return TMPDate.getUTCFullYear() +"."+ (TMPDate.getUTCMinutes()+1) +"."+ TMPDate.getUTCDate() +" "+ TMPDate.getUTCHours() +":"+(TMPDate.getUTCMinutes()<10?'0':'')+TMPDate.getUTCMinutes()
 }
 
 export default dateRefactor

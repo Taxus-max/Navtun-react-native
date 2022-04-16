@@ -1,5 +1,5 @@
 [
-  {"name": "A", "levels": 1,"coords": {"longitude": 17.908219, "latitude": 47.088679}},
+  {"name": "A", "levels": 2,"coords": {"longitude": 17.908219, "latitude": 47.088679}},
   {"name": "B", "levels": 2,"coords": {"longitude": 17.908155, "latitude": 47.088059}},
   {"name": "C", "levels": null,"coords": {"longitude": null, "latitude": null}},
   {"name": "D", "levels": null,"coords": {"longitude": null, "latitude": null}},

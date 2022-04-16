@@ -1,17 +1,49 @@
 import React from "react";
-import {Text, View, Image, TextInput, TouchableOpacity, StyleSheet, FlatList, Pressable, Modal} from 'react-native';
+import {
+    Text,
+    View,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    FlatList,
+    Pressable,
+    Modal,
+    ActivityIndicator
+} from 'react-native';
 import {FontAwesome,FontAwesome5} from "@expo/vector-icons";
 import customModal from "./customModal";
 import dateRefactor from "../utils/dateRefactor";
 import dbHandler from "../utils/dbhandler";
+import OpenMap from "react-native-open-map";
+import buildings from "../data/buildings.json";
+
+const openMap = (location) =>{
+    function getCoordinates(){
+        const choppedLocation = location.split(".")[0]
+        for(let i = 0;i < buildings.length;i++){
+            if(buildings[i].name == choppedLocation){
+                return buildings[i].coords
+            }
+        }
+    }
+
+    OpenMap.show(getCoordinates(location))
+}
 
 const initialCalendar = [
         {id: 1, name: "You don't have any lectures", lecturer:"", location: "", start: "", end:"", isMuted: 0, isCanceled: 0, notifDelay: 0},
 ]
 
-const loadFlatlist = ({setCalendar}) =>{
+const loadFlatlist = ({setCalendar,setIsLoading}) =>{
     dbHandler.getCalendar()
-        .then((response) => setCalendar(response))
+        .then((response) => {
+            setCalendar(response);
+            if(setIsLoading != undefined){
+                setIsLoading(false)
+            }
+
+        })
         .catch(e => console.error(e))
 }
 
@@ -55,18 +87,23 @@ const renderList = (item,{setModalVisible},{setModalValue},{setCalendar}) => {
     )
 }
 
-const Home = () => {
+const Home = ({navigation}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
     const [ModalValue, setModalValue] = React.useState("");
     let [calendar,setCalendar] = React.useState(initialCalendar);
+    const [isLoading,setIsLoading] = React.useState(true)
 
     React.useEffect(()=>
     {
-        loadFlatlist({setCalendar})
-    },[])
+        loadFlatlist({setCalendar,setIsLoading})
+        navigation.addListener('beforeRemove', (e) => {
+            e.preventDefault();
+        })
+    },[navigation])
 
     return (
         <View style={styles.background}>
+            {isLoading && <ActivityIndicator style={styles.loadingIcon} size={100} color="#0000ff"/>}
             {customModal(modalVisible,{setModalVisible},ModalValue)}
             <View style={styles.topBox}>
                 <View style={styles.topBoxInline}>
@@ -87,9 +124,9 @@ const Home = () => {
                 </View>
                 <View style={styles.topBoxButton}>
                     <TouchableOpacity>
-                        <FontAwesome style={styles.large_icon} name="map"/>
+                        <FontAwesome onPress={() => openMap(calendar[0].location)} style={styles.large_icon} name="map"/>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Buildings",{location: calendar[0].location})}>
                         <FontAwesome style={styles.large_icon} name="building"/>
                     </TouchableOpacity>
                 </View>
@@ -181,7 +218,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: "row",
         justifyContent: "flex-start",
+    },
+    loadingIcon:{
+        position:"absolute",
+        zIndex:10,
+        backgroundColor: "rgba(0,0,0,0.9)",
+        width: "100%",
+        height: "100%"
     }
-
 })
 export default Home
