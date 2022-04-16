@@ -3,8 +3,8 @@ import {Text, View, Image, StyleSheet,TouchableOpacity,Dimensions} from 'react-n
 import buildings from "../data/buildings.json";
 import images from '../data/buildings'
 import { Ionicons } from '@expo/vector-icons';
-
-
+import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
+import image from "../assets/maps/notSupported.png";
 
 const setInitialMap = (currentLocation) =>{
     if(currentLocation.includes("fsz")){
@@ -58,10 +58,19 @@ const Map = (currentMap) =>{
     }
 
     return(
+        <ReactNativeZoomableView
+            maxZoom={3}
+            minZoom={1}
+            zoomStep={0.5}
+            initialZoom={1}
+            bindToBorders={true}
+            key={image}
+        >
+            <Image
+                style={styles.map}
+                source={image}/>
+        </ReactNativeZoomableView>
 
-        <Image
-            style={styles.map}
-            source={image}/>
     )
 }
 
@@ -72,10 +81,11 @@ const navigateMenu = (id,currentLocation,{setActiveMenuElement},{setCurrentMap})
 
 
 const Buildings = ({route,navigation}) =>{
-    const [currentLocation,setCurrentLocation] = React.useState(route.params.location)
-    const [currentMap,setCurrentMap] = React.useState(setInitialMap(currentLocation))
+    const [currentLocation,setCurrentLocation] = React.useState(route.params.location);
+    const [currentMap,setCurrentMap] = React.useState(setInitialMap(currentLocation));
     const [activeMenuElement,setActiveMenuElement] = React.useState(setInitialMenu(currentLocation));
-    const [isMenuOpen,setIsMenuOpen] = React.useState(false)
+    const [isMenuOpen,setIsMenuOpen] = React.useState(false);
+
 
     return(
         <View style={styles.background}>
