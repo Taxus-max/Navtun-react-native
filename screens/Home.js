@@ -80,7 +80,7 @@ const renderList = (item,{setModalVisible},{setModalValue},{setCalendar}) => {
     return (
         <Pressable onLongPress={() => showModal(item,{setModalVisible},{setModalValue})}>
             <View style={styles.listElement}>
-                <Text style={item.isCanceled == 0 ? styles.listElementText : styles.listElementTextCancelled}>{item.name}</Text>
+                <Text style={item.isCanceled == 0 ? styles.listElementText : styles.listElementTextCancelled}>{item.name.split("(")[0]} {'\n'}{'\n'}{dateRefactor(item.start)}</Text>
                 {renderButton()}
             </View>
         </Pressable>

@@ -4,7 +4,6 @@ import buildings from "../data/buildings.json";
 import images from '../data/buildings'
 import { Ionicons } from '@expo/vector-icons';
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
-import image from "../assets/maps/notSupported.png";
 
 const setInitialMap = (currentLocation) =>{
     if(currentLocation.includes("fsz")){
