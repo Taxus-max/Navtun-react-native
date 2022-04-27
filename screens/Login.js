@@ -21,7 +21,6 @@ const login = (creds,navigation) => {
                 navigation.navigate("Home")
             }
             else {
-                console.log("Alerted")
                 Alert.alert(
                     "Invalid credentials",
                     "Please check if your credentails are valid!",

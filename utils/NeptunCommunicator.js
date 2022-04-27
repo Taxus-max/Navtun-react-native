@@ -15,8 +15,8 @@ const getSchedule = (credentials) => {
 
     //Debug section//
     //console.log(credentials)
-    console.log(startDate);
-    console.log(endDate);
+    //console.log(startDate);
+    //console.log(endDate);
     //==//
 
     var id = credentials.id.toUpperCase()
