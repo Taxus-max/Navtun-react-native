@@ -5,6 +5,7 @@ import Login from "../screens/Login"
 import Home from "../screens/Home"
 import Loading from "../screens/Loading"
 import Buildings from "../screens/Buildings";
+import Settings from "../screens/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,11 +21,7 @@ const Routes = () =>(
             <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen name="Home" component={Home}/>
             <Stack.Screen name="Buildings" component={Buildings}/>
-
-
-
-
-            
+            <Stack.Screen name="Settings" component={Settings}/>
 
       </Stack.Navigator>
     </NavigationContainer>
