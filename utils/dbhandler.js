@@ -11,7 +11,15 @@ class dbHandler {
                 'drop table if exists schedule'
             )
             tx.executeSql(
-                'create table if not exists schedule (id integer primary key not null, name text, location text, lecturer text, start text, end text, isMuted int, notifDelay int, isCanceled int);'
+                'create table if not exists schedule (id integer primary key not null, name text, location text, lecturer text, start text, end text, isMuted int, notifDelay int, isCanceled int, notifSent int);'
+            )
+        })
+    }
+
+    dropTable(){
+        db.transaction(tx =>{
+            tx.executeSql(
+                'drop table if exists schedule'
             )
         })
     }
@@ -19,7 +27,7 @@ class dbHandler {
     insertTable(name, location, lecturer, start, end) {
         db.transaction(tx => {
             tx.executeSql(
-                'insert into schedule (name, location, lecturer, start, end, isMuted, notifDelay, isCanceled) values (?, ?, ?, ?, ?, 0, 0, 0)', [name, location, lecturer, start, end]
+                'insert into schedule (name, location, lecturer, start, end, isMuted, notifDelay, isCanceled, notifSent) values (?, ?, ?, ?, ?, 0, 0, 0, 0)', [name, location, lecturer, start, end]
             )
         })
     }
@@ -44,6 +52,14 @@ class dbHandler {
         db.transaction(tx => {
             tx.executeSql(
                 'delete from schedule where id = ?', [id]
+            )
+        })
+    }
+
+    setNotifStatus(id){
+        db.transaction(tx =>{
+            tx.executeSql(
+                'update schedule set notifSent = ? where id = ?', [1,id]
             )
         })
     }
