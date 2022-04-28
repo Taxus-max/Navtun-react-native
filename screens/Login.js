@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, Image, TextInput, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {Text, View, Image, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator} from 'react-native';
 import getSchedule from '../utils/NeptunCommunicator';
 
-const login = (creds,navigation) => {
+const login = (creds,navigation, {setIsLoading}) => {
     //*Debug section*
     //console.log(creds.id, creds.password)
 
@@ -15,12 +15,15 @@ const login = (creds,navigation) => {
             ]
         );
     } else {
+        setIsLoading(true);
         let schedule = getSchedule(creds);
         Promise.resolve(schedule).then(result => {
             if (result == true) {
-                navigation.navigate("Home")
+                setIsLoading(false);
+                navigation.navigate("MenuBarBottom")
             }
             else {
+                setIsLoading(false);
                 Alert.alert(
                     "Invalid credentials",
                     "Please check if your credentails are valid!",
@@ -38,9 +41,11 @@ const Login = ({navigation}) => {
 
     const [id, onChangeId] = React.useState('')
     const [password, onChangePassword] = React.useState('')
+    const [isLoading,setIsLoading] = React.useState(false)
 
     return (
         <View style={styles.background}>
+            {isLoading && <ActivityIndicator style={styles.loadingIcon} size={100} color="#0000ff"/>}
             <View style={styles.titleBox}>
                 <Image
                     style={styles.logo}
@@ -64,7 +69,7 @@ const Login = ({navigation}) => {
                     secureTextEntry={true} />
                 <TouchableOpacity
                     style={styles.loginBtn}
-                    onPress={() => login({ id, password },navigation)}>
+                    onPress={() => login({ id, password },navigation,{setIsLoading})}>
                     <Text style={styles.loginTxt}>Login</Text>
                 </TouchableOpacity>
             </View>
@@ -119,6 +124,13 @@ const styles = StyleSheet.create({
         minWidth: "60%",
         maxWidth: "60%",
         margin: 12
+    },
+    loadingIcon:{
+        position:"absolute",
+        zIndex:10,
+        backgroundColor: "rgba(0,0,0,0.9)",
+        width: "100%",
+        height: "100%"
     }
 })
 
