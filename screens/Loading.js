@@ -17,7 +17,7 @@ const Loading = ({navigation}) => {
         getCreds().then(response => {
             let TMP = response
             if(TMP == true){
-                navigation.navigate("Home")
+                navigation.navigate("MenuBarBottom")
             }else{
                 navigation.navigate("Login")
             }
