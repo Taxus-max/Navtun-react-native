@@ -7,7 +7,7 @@ const logout = ({navigation}) =>{
     SecureStore.deleteItemAsync("NavtunId");
     SecureStore.deleteItemAsync("NavtunPass");
     dbhandler.dropTable();
-    navigation.navigate("Home");
+    navigation.navigate("MenuBarBottom");
     navigation.navigate("Login");
 }
 

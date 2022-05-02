@@ -3,42 +3,7 @@ import {Text, View, TouchableOpacity, TextInput, StyleSheet, Modal} from 'react-
 import {FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
 import dateRefactor from "../utils/dateRefactor";
 
-const saveSettings = (id, timeValue,{setTimeValue}) => {
-    //Call dbmager save notifDealy here
-    setTimeValue(undefined);
-}
-
-const settings = (ModalValue,status,{setSettingsStatus}) =>{
-    let [timeValue,setTimeValue] = React.useState(undefined)
-
-    if(status == true) {
-        return(
-            <View style={styles.elementContainer}>
-                <View style={styles.labelContainer}>
-                    <Text>Delay time (minutes):</Text>
-                </View>
-                <View style={styles.infoContainer}>
-                    <TextInput
-                        keyboardType="numeric"
-                        maxLegth={4}
-                        value={timeValue}
-                        defaultValue={ModalValue.notifDelay.toString()}
-                        onChangeText={(text) => {timeValue = setTimeValue(text)}}
-                    />
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={() => {saveSettings(ModalValue.id,timeValue,{setTimeValue});setSettingsStatus(false)}}>
-                        <FontAwesome name="save" size={24} color="black" />
-                    </TouchableOpacity>
-                </View>
-            </View>
-        )
-    }
-}
-
-
-const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
-    const [settingsStatus, setSettingsStatus] = React.useState(false);
+const customModal = (modalVisible,{setModalVisible},ModalValue,{loadFlatlist,setCalendar} ) =>{
 
     return(
         <Modal
@@ -51,10 +16,6 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
         >
             <View style={styles.centeredView} >
                 <View style={styles.modalView}>
-                    <TouchableOpacity onPress={()=>setSettingsStatus(!settingsStatus)}>
-                        <FontAwesome color={"black"} size={30} name="cog"/>
-                    </TouchableOpacity>
-                    {settings(ModalValue,settingsStatus,{setSettingsStatus})}
                     <View style={styles.elementContainer}>
                         <View>
                             <View style={styles.labelContainer}>
@@ -98,7 +59,10 @@ const customModal = (modalVisible,{setModalVisible},ModalValue) =>{
                         </View>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={()=> {setModalVisible(!modalVisible);setSettingsStatus(false)}}>
+                        <TouchableOpacity
+                            onPress={()=> {
+                                setModalVisible(!modalVisible);
+                            }}>
                             <MaterialCommunityIcons color={"black"} size={40} name="close"/>
                         </TouchableOpacity>
                     </View>
