@@ -19,42 +19,42 @@ const customModal = (modalVisible,{setModalVisible},ModalValue,{loadFlatlist,set
                     <View style={styles.elementContainer}>
                         <View>
                             <View style={styles.labelContainer}>
-                                <Text>Name:</Text>
+                                <Text style={styles.fontDesign}>Name:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.name}</Text>
+                                <Text style={styles.fontDesign}>{ModalValue.name}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
                             <View style={styles.labelContainer}>
-                                <Text>Lecturer:</Text>
+                                <Text style={styles.fontDesign}>Lecturer:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.lecturer}</Text>
+                                <Text style={styles.fontDesign}>{ModalValue.lecturer}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
                             <View style={styles.labelContainer}>
-                                <Text>Location:</Text>
+                                <Text style={styles.fontDesign}>Location:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{ModalValue.location}</Text>
+                                <Text style={styles.fontDesign}>{ModalValue.location}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
                             <View style={styles.labelContainer}>
-                                <Text>Start:</Text>
+                                <Text style={styles.fontDesign}>Start:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{dateRefactor(ModalValue.start)}</Text>
+                                <Text style={styles.fontDesign}>{dateRefactor(ModalValue.start)}</Text>
                             </View>
                         </View>
                         <View style={styles.elementContainer}>
                             <View style={styles.labelContainer}>
-                                <Text>End:</Text>
+                                <Text style={styles.fontDesign}>End:</Text>
                             </View>
                             <View style={styles.infoContainer}>
-                                <Text>{dateRefactor(ModalValue.end)}</Text>
+                                <Text style={styles.fontDesign}>{dateRefactor(ModalValue.end)}</Text>
                             </View>
                         </View>
                     </View>
@@ -63,7 +63,7 @@ const customModal = (modalVisible,{setModalVisible},ModalValue,{loadFlatlist,set
                             onPress={()=> {
                                 setModalVisible(!modalVisible);
                             }}>
-                            <MaterialCommunityIcons color={"black"} size={40} name="close"/>
+                            <MaterialCommunityIcons color={"rgb(220,220,220)"} size={40} name="close"/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     modalView: {
         width: "70%",
         margin: 20,
-        backgroundColor: "#41b0ac",
+        backgroundColor: "rgb(90,80,80)",
         borderRadius: 20,
         padding: 35,
         shadowColor: "#000",
@@ -94,18 +94,19 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     labelContainer:{
-        backgroundColor: "#41b0ac",
+        backgroundColor: "rgb(90,80,80)",
         alignSelf: "flex-start",
         paddingHorizontal: 3,
         marginStart: 10,
         zIndex: 1,
         elevation: 1,
-        shadowColor: "#41b0ac",
+        shadowColor: "rgb(90,80,80)",
         position: "absolute",
         top: -12
     },
     infoContainer: {
         borderWidth: 1,
+        borderColor: "rgb(220,220,220)",
         borderRadius: 8,
         padding: 8,
         zIndex: 0,
@@ -117,6 +118,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignItems: "center"
     },
+    fontDesign:{
+        color: "rgb(220,220,220)"
+    }
 })
 
 export default customModal

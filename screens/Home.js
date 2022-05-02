@@ -44,9 +44,11 @@ const Home = ({navigation,calendar}) => {
 
     return (
         <View style={styles.background}>
-            <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate("Settings")}>
-                <FontAwesome color={"white"} size={33} name="cog"/>
-            </TouchableOpacity>
+            <View style={styles.settingsButtonContainer}>
+                <TouchableOpacity  onPress={() => navigation.navigate("Settings")}>
+                    <FontAwesome color={"white"} size={33} name="cog"/>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topBox}>
                 <View style={styles.topBoxInline}>
                     <FontAwesome5 name="book-open" size={20} style={{margin:5}} color="white" />
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         overflow: 'hidden'
     },
-    settingsButton:{
+    settingsButtonContainer:{
         position: "absolute",
         alignItems: "flex-end",
         justifyContent: "flex-end",

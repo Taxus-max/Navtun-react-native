@@ -33,7 +33,7 @@ const Loading = ({navigation}) => {
 
 const styles = StyleSheet.create({
     background:{
-        backgroundColor: "#48d1cc",
+        backgroundColor: "#222222",
         alignItems: "center",
         justifyContent: "center",
         flex: 1,

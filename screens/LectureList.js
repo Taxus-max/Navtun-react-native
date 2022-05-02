@@ -224,9 +224,9 @@ const styles = StyleSheet.create({
         maxWidth: 190,
     },
     searchBar:{
+        color: "white",
         borderRadius: 25,
-        borderColor: '#333',
-        backgroundColor: '#fff',
+        backgroundColor: 'rgba(128,128,130,1)',
         padding: 5
     }
 })

@@ -49,7 +49,7 @@ const Login = ({navigation}) => {
             <View style={styles.titleBox}>
                 <Image
                     style={styles.logo}
-                    source={require("../assets/logo2.png")}
+                    source={require("../assets/logo3.png")}
                 />
                 <Text style={styles.title}>Navtun</Text>
             </View>
@@ -60,12 +60,14 @@ const Login = ({navigation}) => {
                     autoCapitalize="characters"
                     value={id}
                     onChangeText={text => onChangeId(text)}
+                    placeholderTextColor={"rgba(220,220,220,0.5)"}
                     placeholder='Neptun id' />
                 <TextInput
                     style={styles.inputField}
                     placeholder='Neptun password'
                     value={password}
                     onChangeText={text => onChangePassword(text)}
+                    placeholderTextColor={"rgba(220,220,220,0.5)"}
                     secureTextEntry={true} />
                 <TouchableOpacity
                     style={styles.loginBtn}
@@ -79,7 +81,7 @@ const Login = ({navigation}) => {
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: "#48d1cc",
+        backgroundColor: "#222222",
         alignItems: "center",
         justifyContent: "flex-start",
         flex: 1,
@@ -87,29 +89,31 @@ const styles = StyleSheet.create({
     titleBox: {
         flexDirection: "row",
         justifyContent: "center",
-        margin: 20,
+        margin: 10,
         paddingTop:20,
       },
-    logo: {
-        width: 115,
-        height: 150,
-        marginBottom: 40,
-    },
     title: {
-        color: "black",
+        color: "rgb(220,220,220)",
         fontSize: 50,
         textAlignVertical: "bottom",
-        marginBottom: 40,
-
+        height: "100%",
+        position: "absolute"
+    },
+    logo: {
+        width: 130,
+        height: 200,
+        marginBottom: 10,
+        marginRight: 60,
     },
     loginBtn: {
-        backgroundColor: "rgba(0, 0, 255, 0.418)",
+        backgroundColor: "rgba(0, 0, 240, 0.8)",
         alignItems: "center",
         padding: 10,
         borderRadius: 10,
         alignSelf: "center"
     },
     loginTxt: {
+        color: "rgb(220,220,220)",
         fontSize: 22,
         minWidth: "30%",
         maxWidth: "30%",
@@ -117,7 +121,8 @@ const styles = StyleSheet.create({
     },
     inputField: {
         fontSize: 20,
-        borderColor: "grey",
+        color: "rgb(220,220,220)",
+        borderColor: "rgb(220,220,220)",
         borderWidth: 1,
         borderRadius: 20,
         padding: 10,

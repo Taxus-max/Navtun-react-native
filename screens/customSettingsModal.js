@@ -26,15 +26,16 @@ const customSettingsModal = (settingsModalVisible,{setSettingsModalVisible},Moda
                 <View style={styles.centeredView} >
                     <View style={styles.modalView}>
                         <TouchableOpacity onPress={()=>setSettingsModalVisible(!settingsModalVisible)}>
-                            <MaterialCommunityIcons color={"black"} size={40} name="close"/>
+                            <MaterialCommunityIcons color="rgb(220,220,220)" size={40} name="close"/>
                         </TouchableOpacity>
                         <View style={styles.elementContainer}>
 
                         <View style={styles.labelContainer}>
-                            <Text>Delay time (minutes):</Text>
+                            <Text style={styles.textStyle}>Delay time (minutes):</Text>
                         </View>
                         <View style={styles.infoContainer}>
                             <TextInput
+                                style={styles.textStyle}
                                 keyboardType="numeric"
                                 maxLegth={4}
                                 value={timeValue}
@@ -44,7 +45,7 @@ const customSettingsModal = (settingsModalVisible,{setSettingsModalVisible},Moda
                         </View>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity onPress={() => {saveSettings(ModalValue.id,timeValue,{setTimeValue},{loadFlatlist,setCalendar});setSettingsModalVisible(false)}}>
-                                <FontAwesome name="save" size={24} color="black" />
+                                <FontAwesome name="save" size={30} color="rgb(220,220,220)" />
                             </TouchableOpacity>
                         </View>
                         </View>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     modalView: {
         width: "70%",
         margin: 20,
-        backgroundColor: "#41b0ac",
+        backgroundColor: "rgb(90,80,80)",
         borderRadius: 20,
         padding: 35,
         shadowColor: "#000",
@@ -78,18 +79,19 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     labelContainer:{
-        backgroundColor: "#41b0ac",
+        backgroundColor: "rgb(90,80,80)",
         alignSelf: "flex-start",
         paddingHorizontal: 3,
         marginStart: 10,
         zIndex: 1,
         elevation: 1,
-        shadowColor: "#41b0ac",
+        shadowColor: "rgb(90,80,80)",
         position: "absolute",
         top: -12
     },
     infoContainer: {
         borderWidth: 1,
+        borderColor: "rgb(220,220,220)",
         borderRadius: 8,
         padding: 8,
         zIndex: 0,
@@ -101,6 +103,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignItems: "center"
     },
+    textStyle:{
+        color: "rgb(220,220,220)"
+    }
 })
 
 export default customSettingsModal
