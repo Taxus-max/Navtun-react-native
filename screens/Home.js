@@ -3,13 +3,15 @@ import {
     Text,
     View,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    Platform,
+    Linking
 } from 'react-native';
 import {FontAwesome,FontAwesome5} from "@expo/vector-icons";
 import dateRefactor from "../utils/dateRefactor";
-import OpenMap from "react-native-open-map";
+//import OpenMap from "react-native-open-map"; Currently not in use, until problem are resolved
 import buildings from "../data/buildings.json";
-import periodicCheck from "../backgroundProcesses/periodicCheck";
+
 
 
 const openMap = (location) =>{
@@ -22,7 +24,14 @@ const openMap = (location) =>{
         }
     }
 
-    OpenMap.show(getCoordinates(location))
+    const url = Platform.select({
+        ios: `maps:0,0?q=${getCoordinates(location).latitude}+${getCoordinates(location).longitude}`,
+        android: `geo:0,0?q=${getCoordinates(location).latitude}+${getCoordinates(location).longitude}`,
+    })
+
+    Linking.openURL(url)
+
+    //OpenMap.show(getCoordinates(location)) Currently not in use, until problem are resolved
 }
 
 const nextLecture = (calendar) =>{
